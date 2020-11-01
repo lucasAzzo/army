@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  php_army:
+    container_name: php_1_army
+    image: lucasazzo/php7.4_dev:v1.0.0
+    volumes:
+      - .:/var/www/html
+    command: "php artisan serve --host=0.0.0.0 --port=8000"
+    ports:
+      - 8000:8000
+    networks:
+      - appnet
+  db_army:
+    container_name: db_1_army
+    image: lucasazzo/postgres_dev:v1.0.0
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: army
+      POSTGRES_DB: army
+      POSTGRES_USER: army
+      PGDATA: /data/postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - appnet
+networks:
+  appnet:
+    driver: "bridge"
+volumes:
+  data:
+    driver: "local"
+  s3:
+    driver: "local"

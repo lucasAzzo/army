@@ -1,0 +1,21 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+
+    # The level 8 is the highest level
+    level: 5
+
+    ignoreErrors:
+        - '#Method App\Http\Middleware\Authenticate::redirectTo() should return string|null but return statement is missing.#'
+
+    excludes_analyse:
+        - config/insights.php
+        - preloader.php
+        - storage/preloader.php
+
+    checkMissingIterableValueType: false
+    inferPrivatePropertyTypeFromConstructor: true
